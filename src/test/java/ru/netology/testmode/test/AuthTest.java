@@ -18,7 +18,6 @@ class AuthTest {
     void setup() {
         open("http://localhost:9999");
     }
-
     @Test
     @DisplayName("Should get error message if login with not registered user")
     void shouldGetErrorIfNotRegisteredUser() {
@@ -30,7 +29,6 @@ class AuthTest {
                 .shouldHave(Condition.text("Ошибка! Неверно указан логин или пароль"))
                 .shouldBe(Condition.visible);
     }
-
     @Test
     @DisplayName("Should successfully login with active registered user")
     void shouldSuccessfulLoginIfRegisteredActiveUser() {
@@ -38,7 +36,9 @@ class AuthTest {
         $("[data-test-id='login'] input").setValue(registeredUser.getLogin());
         $("[data-test-id= 'password'] input").setValue(registeredUser.getPassword());
         $("button.button").click();
-        $("h2").shouldHave(Condition.exactText("Личный кабинет")).shouldBe(Condition.visible);
+        $("h2")
+                .shouldHave(Condition.exactText("Личный кабинет"))
+                .shouldBe(Condition.visible);
     }
 
     @Test
